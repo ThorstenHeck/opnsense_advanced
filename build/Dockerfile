@@ -3,7 +3,7 @@ FROM debian:latest
 # Install Packages
 RUN apt-get update -y; \
     apt-get install nano jq openssh-server lsb-release gnupg curl software-properties-common apache2-utils zip -y; \ 
-    apt-get install python3 python3-pip -y;
+    apt-get install python3 python3-pip python3-venv -y;
 
 # Install Packer and Terraform
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -; \
@@ -28,21 +28,21 @@ WORKDIR /home/hetzner
 ENV VIRTUAL_ENV=/opt/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-ADD requirements.yml /tmp/requirements.yml
-ADD ansible.cfg /etc/ansible/ansible.cfg
+ADD build/requirements.yml /tmp/requirements.yml
+ADD build/ansible.cfg /etc/ansible/ansible.cfg
 RUN chmod 644 /etc/ansible/ansible.cfg
 RUN python3 -m venv $VIRTUAL_ENV
 
-RUN chown -R hetzner:hetzner /home/hetzner /tmp
+RUN chown -R hetzner:hetzner /home/hetzner /opt/venv /tmp
 
 USER hetzner
 
-COPY --chown=hetzner ../hetzner_setup.sh /home/hetzner/hetzner_setup.sh
-COPY --chown=hetzner ../secret.env /home/hetzner/secret.env
-COPY --chown=hetzner ../config.template.xml /home/hetzner/config.template.xml
-COPY --chown=hetzner ../packer /home/hetzner/packer
-COPY --chown=hetzner ../terraform /home/hetzner/terraform
-COPY --chown=hetzner ../ansible /home/hetzner/ansible
+COPY --chown=hetzner hetzner_setup.sh /home/hetzner/hetzner_setup.sh
+COPY --chown=hetzner secret.env /home/hetzner/secret.env
+COPY --chown=hetzner config.template.xml /home/hetzner/config.template.xml
+COPY --chown=hetzner packer /home/hetzner/packer
+COPY --chown=hetzner terraform /home/hetzner/terraform
+COPY --chown=hetzner ansible /home/hetzner/ansible
 
 RUN packer -autocomplete-install; \
     terraform -install-autocomplete; \
