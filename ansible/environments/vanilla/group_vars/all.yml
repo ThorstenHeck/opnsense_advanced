@@ -1,0 +1,4 @@
+---
+all:
+  domain: vanilla.local
+  env: vanilla

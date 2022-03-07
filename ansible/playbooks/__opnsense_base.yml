@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  gather_facts: false
+  become: true
+
+  vars_files:
+    - "{{ inventory_dir}}/vars/opnsense_base.yml"
+
+
+  roles:
+    - ansible-opnsense

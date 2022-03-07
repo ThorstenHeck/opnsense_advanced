@@ -1,12 +1,10 @@
 ## Advanced opnsense example
 
-This guide continues this repository https://github.com/ThorstenHeck/opnsense and will add ansible to the existing packer and terraform stack.
-
-For an even more automated setup but with dependency to a chargeable SAAS Password Manager you can take a glance here:
-
-https://github.com/ThorstenHeck/initialize-environment
+This guide continues this repository https://github.com/ThorstenHeck/opnsense and will add ansible for configuration management to the existing packer and terraform stack.
 
 ## Introduction
+
+
 
 In this advanced example we are going to setup a opensense firewall with two interfaces to communicate securely within the private Hetzner network. Furthermore we disable access to the public available WAN interface and only allow management on the local interface.  
 
@@ -18,3 +16,26 @@ The creation part of opnsense will be the same as described in https://github.co
 
 After 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+For an even more automated setup but with dependency to a chargeable SAAS Password Manager you can take a glance here:
+
+https://github.com/ThorstenHeck/initialize-environment

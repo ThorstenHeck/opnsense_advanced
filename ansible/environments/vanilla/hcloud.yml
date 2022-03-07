@@ -1,0 +1,21 @@
+---
+plugin: hcloud
+
+vars_files:
+  - "{{ inventory_dir}}/credentials.yml"
+  - "{{ inventory_dir}}/endpoints.yml"
+  - "{{ inventory_dir}}/certificates.yml"
+
+    
+vars:
+  ansible_ssh_user: "{{ credentials.users.ansible.name }}"
+  ansible_sudo_pass: "{{ credentials.users.ansible.password }}"
+
+network: vanilla-net
+label_selector: vanilla
+connect_with: private_ipv4
+token_env: "HCLOUD_TOKEN"
+keyed_groups:
+  - key: labels
+    separator: ""
+    prefix: ""

@@ -1,0 +1,19 @@
+---
+- name: fetch
+  fetch:
+    src: /conf/config.xml
+    dest: "{{ local_config_path }}"
+    flat: yes
+    backup: yes
+  when: remote
+
+- name: Download opnsense example.config from official repo
+  get_url:
+    url: https://raw.githubusercontent.com/opnsense/core/stable/22.1/src/etc/config.xml.sample
+    dest:  "{{ local_config_path }}"
+    mode: '0660'
+    owner: ansible
+  when: not remote
+...
+
+

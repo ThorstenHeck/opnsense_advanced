@@ -1,0 +1,5 @@
+[local]
+localhost ansible_connection=local
+
+[firewalls]
+opnsense ansible_host=23.88.61.96
